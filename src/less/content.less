@@ -1,16 +1,18 @@
 .main-content {
   .books-aside {
-    width: 15em;
+    width: 180px;
     position: absolute;
     left: 0;
     height: 100%;
     background: @main-color1;
     transition: all 0.5s;
     .add-book {
+      cursor: pointer;
       :hover {
         transition: all 0.5s;
-        background: @main-color7;
+        color: #fff;
       }
+      display: block;
       width: 100%;
       height: 60px;
       padding: 0 10px;
@@ -24,7 +26,32 @@
       }
       .add-btn-name {
         display: inline-block;
-        font-size: 1.5em;
+        font-size: 1.2em;
+      }
+    }
+    ul {
+      position: relative;
+      li {
+        height: 60px;
+        overflow: hidden;
+        a {
+          display: inline-block;
+          color: #000;
+          margin-left: 20px;
+          padding: 10px 0 10px 0;
+          text-decoration: none;
+          font-size: 1.5em;
+          width: 120px;
+        }
+        input {
+          display: inline-block;
+          line-height: 40px;
+          width: 40px;
+          height: 40px;
+          font-size: 5em;
+          background: rgba(255, 255, 255, 0);
+          border: 0;
+        }
       }
     }
   }
