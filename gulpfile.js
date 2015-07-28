@@ -10,12 +10,10 @@ gulp.task('jade', function () {
         .pipe(browserSync.stream());
 });
 
-var lessPath = [path.join(__dirname, 'src', 'less', 'includes'),
-    path.join(__dirname, 'src', 'less', 'components')];
+var lessPath = [path.join(__dirname, 'src', 'less', 'includes')];
 gulp.task('less', function () {
     return gulp.src('./src/less/index.less')
         .pipe(plugins.less({ paths: lessPath }))
-        .pipe(plugins.debug())
         .pipe(plugins.autoprefixer({
             browsers: ['> 1%', 'last 10 version'],
             cascade: true
@@ -51,7 +49,7 @@ gulp.task('server', ['build'], function (done) {
         server: 'dist'
     });
     gulp.watch('src/**/*.jade', ['jade']);
-    gulp.watch('src/css/**/*.less', ['less']);
+    gulp.watch('src/less/**/*.less', ['less']);
     gulp.watch('src/js/**/*.js', ['scripts']);
 });
 // clean
