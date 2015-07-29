@@ -4,7 +4,7 @@
     position: absolute;
     left: 0;
     height: 100%;
-    background: @main-color1;
+    background: @content-color;
     transition: all 0.5s;
     .add-book {
       cursor: pointer;
@@ -33,7 +33,6 @@
     }
     .add-book:hover {
       transition: all 0.5s;
-      color: #fff;
     }
     ul {
       li {
@@ -41,29 +40,35 @@
         width: 100%;
         overflow: hidden;
         position: relative;
+        border: 3px solid @content-color;
         border-left: solid 3px @main-color7;
         margin-top: 2px;
-        a {
-          position: absolute;
-          top: 13px;
-          color: #000;
-          line-height: 1.5;
-          margin-left: 20px;
-          text-decoration: none;
-          font-size: 1.5em;
-          width: 120px;
-        }
-        input {
-          position: absolute;
-          right: 15px;
-          top: 5px;
-          line-height: 40px;
-          width: 40px;
-          height: 40px;
-          font-size: 5em;
-          background: rgba(255, 255, 255, 0);
-          border: 0 solid @main-color4;
-        }
+        line-height: 3em;
+        font-size: 1.5em;
+        text-align: center;
+        //.book-item-name {
+        //  position: absolute;
+        //  top: 13px;
+        //}
+      }
+      li:hover {
+        background: @main-color0;
+      }
+      li.active {
+        border: 3px solid @main-color4;
+        border-left: solid 3px @main-color7;
+        background: @main-color4;
+      }
+      li.active:hover {
+        border: 3px solid @main-color0;
+        border-left: solid 3px @main-color7;
+        background: @main-color0;
+      }
+      li.editable {
+        background: #fff;
+      }
+      li.selected {
+        border: 3px solid #ababab;
       }
     }
   }
@@ -135,7 +140,7 @@
         }
       }
       li:hover {
-        border: 1px solid @main-color9;
+        border: 1px solid @main-color7;
       }
     }
   }
@@ -149,14 +154,33 @@
     color: @content-color;
     h1 {
       height: 70px;
-      width: 80%;
-      margin-left: 20px;
-      border-bottom: 1px solid @main-color9;
+      width: 100%;
+      padding-left: 20px;
+      border-bottom: 1px solid @main-color1;
+      background: @content-color;
     }
     .note-details {
       width: 100%;
       height: 100%;
       font-size: 16px;
+      border: 0 solid;
+      background: @content-color;
+    }
+  }
+
+  #bottom-area {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    //height: 80px;
+    padding: 10px 20px;
+    background-color: @main-color4;
+    div {
+      display: inline-block;
+      height: 60px;
+      width: 60px;
+      background-color: #ababab;
+      margin: 0 10px;
     }
   }
 }

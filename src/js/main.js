@@ -3,7 +3,7 @@ require.config({
     paths: {
         jquery: './jquery-1.11.3.min',
         db: './db',
-        control: './controll'
+        control: './control'
     }
 });
 require(['jquery', 'db', 'control'], function ($, db, ctrl) {
