@@ -1,26 +1,40 @@
 /*
-* database model , and the methods about it.
+* database model , and the CRUD methods about it.
 * @class db
 * */
 define(function () {
+    /**
+    *
+    * DataModel of the MNotes
+    *
+    * NoteBook
+    * ------------------------------------------------
+    * id* | title | notes [] | createTime | modifyTime
+    * ------------------------------------------------
+    *
+    * notes
+    * -----------------------------------------------------
+    * id* | pid | title | content | createTime | modifyTime
+    * -----------------------------------------------------
+    */
     var bookId = 4;
     var noteBookList = [{
         id: 0,
         title: "笔记本1",
-        createDate: '2015/7/21',
-        modifyDate: '2015/7/21',
+        createTime: '2015/7/21',
+        modifyTime: '2015/7/21',
         notes: []
     },{
         id: 1,
         title: "笔记本2",
-        createDate: '2015/7/21',
-        modifyDate: '2015/7/21',
+        createTime: '2015/7/21',
+        modifyTime: '2015/7/21',
         notes: []
     },{
         id: 2,
         title: "笔记本3",
-        createDate: '2015/7/21',
-        modifyDate: '2015/7/21',
+        createTime: '2015/7/21',
+        modifyTime: '2015/7/21',
         notes: []
     }];
     /*
@@ -80,11 +94,20 @@ define(function () {
             return {};
         }
         return deleteNoteBookByIndex( getNoteBookIndex(targetNoteBook.id) );
-
     };
-
+    /*
+     * delete notebook by id
+     * @params
+     *   id {int}
+     *
+     * @return {object} the deleted notebook itself
+     * */
     var deleteNoteBookById = function (id) {
-
+        var targetNoteBook = getNoteBookById(id);
+        if (targetNoteBook === null) {
+            return {};
+        }
+        return deleteNoteBookByIndex( getNoteBookIndex(targetNoteBook.id) );
     };
 
     /*
@@ -135,6 +158,13 @@ define(function () {
             }
         }
         return -1;
+    };
+
+    var updateNoteBookTitleById = function (id, newTitle) {
+        var targetNoteBook = getNoteBookById(id);
+        if (targetNoteBook !== null && newTitle !== '') {
+            targetNoteBook.title = newTitle;
+        }
     };
     /*
     * check if the book is existed by title

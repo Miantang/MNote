@@ -7,6 +7,7 @@ require.config({
     }
 });
 require(['jquery', 'db', 'control'], function ($, db, ctrl) {
+    ctrl.init();
     ctrl.disNoteBook();
     ctrl.addNoteBook();
 });
