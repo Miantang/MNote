@@ -62,6 +62,9 @@ gulp.task('build', ['jade', 'less', 'scripts', 'copy']);
 
 gulp.task('deploy', ['build'], function () {
     return gulp.src('./dist/**/*')
-        .pipe(plugins.ghPages());
+        .pipe(plugins.ghPages({
+            remoteUrl: 'git@github.com:Miantang/MNote.git'
+        }));
 });
+
 gulp.task('default', ['server']);
