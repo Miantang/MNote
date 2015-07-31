@@ -18,24 +18,98 @@ define(function () {
     * -----------------------------------------------------
     */
     var bookId = 4;
+    var noteId = 0;
+    var now = (new Date()).toDateString();
+
+    var NoteBook = function (title, notes, id) {
+        this.id = id || bookId;
+        this.title = title || ('笔记本' + this.id);
+        this.createTime = now;
+        this.modifyTime = now;
+        this.notes = notes || [];
+        if(bookId === this.id) {
+            bookId++;
+        }
+    };
+
+    var Note = function (pid, title, content, id, tags) {
+        this.id = id || noteId;
+        this.pid = pid;
+        this.title = title || '笔记';
+        this.createTime = now;
+        this.modifyTime = now;
+        this.content = content || '无内容';
+        this.tags = tags || [];
+        if(noteId === this.id) {
+            noteId++;
+        }
+    };
     var noteBookList = [{
         id: 0,
         title: "笔记本1",
-        createTime: '2015/7/21',
-        modifyTime: '2015/7/21',
-        notes: []
+        createTime: now,
+        modifyTime: now,
+        notes: [{
+            id: 0,
+            pid: 0,
+            title: '笔记1',
+            createTime: now,
+            modifyTime: now,
+            content: '#JavaScript 权威指南'
+
+        },{
+            id: 1,
+            pid: 0,
+            title: '笔记2',
+            createTime: now,
+            modifyTime: now,
+            content: '#JavaScript 非权威指南'
+
+        }]
     },{
         id: 1,
         title: "笔记本2",
-        createTime: '2015/7/21',
-        modifyTime: '2015/7/21',
-        notes: []
+        createTime: (new Date()).toDateString(),
+        modifyTime: (new Date()).toDateString(),
+        notes: [{
+            id: 0,
+            pid: 1,
+            title: '笔记1',
+            createTime: now,
+            modifyTime: now,
+            content: '#JavaScript 权威指南'
+
+        },{
+            id: 1,
+            pid: 1,
+            title: '笔记2',
+            createTime: now,
+            modifyTime: now,
+            content: '#JavaScript 非权威指南'
+
+        }]
     },{
         id: 2,
         title: "笔记本3",
-        createTime: '2015/7/21',
-        modifyTime: '2015/7/21',
-        notes: []
+        createTime: (new Date()).toDateString(),
+        modifyTime: (new Date()).toDateString(),
+        notes: [{
+            id: 0,
+            pid: 2,
+            title: '笔记1',
+            createTime: now,
+            modifyTime: now,
+            content: '#JavaScript 权威指南'
+
+        },{
+            id: 1,
+            pid: 2,
+            title: '笔记2',
+            createTime: now,
+            modifyTime: now,
+            content: '#JavaScript 非权威指南'
+
+        }]
     }];
     /*
     * get notebook list
@@ -160,11 +234,22 @@ define(function () {
         return -1;
     };
 
+    /*
+     * update notebook name by id
+     * @params
+     *   id {int}
+     *   newTitle {string}
+     *
+     * @return {boolean} if update successful or not
+     * */
     var updateNoteBookTitleById = function (id, newTitle) {
         var targetNoteBook = getNoteBookById(id);
         if (targetNoteBook !== null && newTitle !== '') {
             targetNoteBook.title = newTitle;
+            targetNoteBook.modifyTime = (new Date()).toDateString();
+            return true;
         }
+        return false;
     };
     /*
     * check if the book is existed by title
@@ -183,13 +268,77 @@ define(function () {
         return false;
     };
 
+    /*
+     * gte the notes under notebook pid
+     * @params
+     *   pid {int}
+     *
+     * @return {array}
+     * */
+    var getNotesAll = function (pid) {
+        var targetNoteBook = getNoteBookById(pid);
+        return targetNoteBook.notes;
+    };
 
+    /*
+     * get a note from notebook pid
+     * @params
+     *   pid {int}
+     *   id {int}
+     *
+     * @return {object}
+     * */
+    var getNoteById = function (pid, id) {
+        var targetNoteBook = getNoteBookById(pid);
+        var notes = targetNoteBook.notes;
+        for (var i = 0; i < notes.length; ++i) {
+            if (notes[i].id === id) {
+                return notes[i];
+            }
+        }
+        return null;
+    };
+
+    /*
+     * add a note from notebook pid
+     * @params
+     *   pid {int}
+     *   title {string}
+     *   content {string}
+     *
+     * @return {boolean} if added right or not
+     * */
+    var addNote = function (pid, title, content) {
+        var targetNoteBook = getNoteBookById(pid);
+        if (title !== '') {
+            var now = (new Date()).toDateString();
+            var note = {
+                id: noteId,
+                pid: pid,
+                title: title,
+                content: content,
+                createTime: now,
+                modifyTime: now,
+                tags: []
+            };
+            noteId++;
+            targetNoteBook.notes.push(note);
+            return true;
+        }
+        return false;
+    };
     return {
         addNoteBook: addNoteBook,
         deleteNoteBookById: deleteNoteBookById,
         deleteNoteBookByTitle: deleteNoteBookByTitle,
         getNoteBookById: getNoteBookById,
         getNoteBookByTitle: getNoteBookByTitle,
-        getNoteBookList: getNoteBookList
+        getNoteBookList: getNoteBookList,
+
+        updateNoteBookTitleById: updateNoteBookTitleById,
+
+        getNotesAll: getNotesAll,
+        getNoteById: getNoteById,
+        addNote: addNote
     };
 });

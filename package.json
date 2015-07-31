@@ -1,10 +1,10 @@
 {
   "name": "MNote",
   "version": "1.0.0",
-  "description": "Markdown Notes, or MianTang's Notes for personal Markdown notes Manager.",
+  "description": "Markdown Note, or MianTang's Note for personal markdown notes management.",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Miantang/MNotes.git"
+    "url": "git@github.com:Miantang/MNote.git"
   },
   "keywords": [
     "Note",

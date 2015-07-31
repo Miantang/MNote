@@ -60,4 +60,8 @@ gulp.task('clean', function() {
 
 gulp.task('build', ['jade', 'less', 'scripts', 'copy']);
 
+gulp.task('deploy', ['build'], function () {
+    return gulp.src('./dist/**/*')
+        .pipe(plugins.ghPages());
+});
 gulp.task('default', ['server']);

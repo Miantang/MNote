@@ -1,10 +1,15 @@
 define(['jquery', 'db'], function ($, db) {
     var init = function () {
+        initNoteBook();
+    };
+
+    var initNoteBook = function () {
         var $bookList = $('#book-list');
         $bookList.focus(function (e) {
-            $(e.target).attr('contenteditable', true);
+
         });
         $bookList.blur(function (e) {
+            console.log($(e.target), "BB");
             $(e.target).attr('contenteditable', false);
         });
         $bookList.click(function (e) {
@@ -31,9 +36,12 @@ define(['jquery', 'db'], function ($, db) {
             }
         });
         $('#delelte-btn').click(deleteNoteBook);
+        $('#rename-btn').click(renameNoteBook);
     };
+
     var disNoteBook = function () {
         $('#bottom-area').hide();
+        $('#book-list').html('');
         var noteBookList = db.getNoteBookList();
         var length = noteBookList.length;
         if (length !== 0) {
@@ -50,24 +58,35 @@ define(['jquery', 'db'], function ($, db) {
 
     var addNoteBook = function () {
         $('#add-book-btn').click(function () {
-            $('#book-list').html('');
             db.addNoteBook();
             disNoteBook();
             renameNoteBook( $('.book-item').last()[0] );
         });
     };
 
-    var renameNoteBook = function (element) {
-        element.focus();
+    var renameNoteBook = function (e) {
+        var renameSelected = $('#book-list li.selected')[0];
+        $(renameSelected).attr('contenteditable', true);
+        $(renameSelected).focus();
+        $(renameSelected).blur(function (e) {
+            console.log($(e.target), "BB");
+            $(renameSelected).attr('contenteditable', false);
+            var id = renameSelected.getAttribute('value');
+            db.updateNoteBookTitleById(id, $(renameSelected).text());
+            disNoteBook();
+        });
+
     };
 
     var deleteNoteBook = function () {
         var delSelected = $('#book-list li.selected')[0];
         var id = delSelected.getAttribute('value');
         delSelected.remove();
-        $('#book-list').html('');
         db.deleteNoteBookById(id);
         disNoteBook();
+    };
+
+    var addNote = function () {
 
     };
     return {
