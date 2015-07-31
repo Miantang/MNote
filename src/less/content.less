@@ -1,4 +1,5 @@
 .main-content {
+  //font-family: '微软雅黑', 'Microsoft YaHei';
   .books-aside {
     width: 180px;
     position: absolute;
@@ -29,16 +30,14 @@
         top: 15px;
         right: 30px;
         font-size: 1.2em;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+        .user-select-none;
       }
     }
     .add-book:hover {
       transition: all 0.5s;
     }
     ul {
+      .user-select-none;
       li {
         height: 60px;
         width: 100%;
@@ -68,11 +67,12 @@
         border-left: solid 3px @main-color7;
         background: @main-color0;
       }
+      li.selected {
+        background: @main-color4;
+        border: 3px solid @main-color7;
+      }
       li.editable {
         background: #fff;
-      }
-      li.selected {
-        border: 3px solid #ababab;
       }
     }
   }
@@ -88,6 +88,7 @@
       width: 100%;
       height: 60px;
       overflow: hidden;
+      cursor: pointer;
       .add-btn {
         position: absolute;
         top: 2px;
@@ -113,6 +114,7 @@
     }
 
     ul {
+      .user-select-none;
       position: relative;
       width: 100%;
       li {
@@ -120,16 +122,22 @@
         width: auto;
         overflow: hidden;
         position: relative;
-        margin: 5px 2px;
-        border: 1px solid rgba(0, 0, 0, 1);
-
+        margin-top: 0;
+        margin-right: 12px;
+        margin-bottom: 10px;
+        margin-left: 12px;
+        border: 1px solid @main-color4;
+        background: @main-color1;
+        .user-select-none;
         h2 {
           margin-top: 5px;
+          margin-left: 5px;
           font-size: 1.5em;
         }
         p {
           position: absolute;
-          top: 28px;
+          left: 10px;
+          top: 30px;
           color: #000;
           line-height: 1.5;
           font-size: 0.7em;
@@ -148,12 +156,23 @@
         }
       }
       li:hover {
-        border: 1px solid @main-color7;
+        border-color: @main-color7;
+      }
+      li.active {
+        margin-right: 0;
+        background: @content-color;
+      }
+      li.active:hover {
+        border-color: @main-color7;
+      }
+      li.selected {
+        background: @main-color4;
+        border: 3px solid @main-color7;
       }
     }
   }
 
-  .note-content {
+  #note-content {
     transition: all 0.5s;
     position: absolute;
     left: 40em;
@@ -164,10 +183,20 @@
       height: 70px;
       width: 100%;
       padding-left: 20px;
-      border-bottom: 1px solid @main-color1;
+      border-bottom: 1px solid @main-color4;
+      font-size: 32px;
+      line-height: 64px;
+      color: @main-color7;
       background: @content-color;
     }
-    .note-details {
+    #note-time {
+      width: 100%;
+      height: 30px;
+      background: @content-color;
+      font-size: 12px;
+      color: #000;
+    }
+    #note-details {
       width: 100%;
       height: 100%;
       font-size: 16px;

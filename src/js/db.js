@@ -17,7 +17,7 @@ define(function () {
     * id* | pid | title | content | createTime | modifyTime
     * -----------------------------------------------------
     */
-    var bookId = 4;
+    var bookId = 3;
     var noteId = 0;
     var now = (new Date()).toDateString();
 
@@ -74,7 +74,7 @@ define(function () {
         notes: [{
             id: 0,
             pid: 1,
-            title: '笔记1',
+            title: '笔记3',
             createTime: now,
             modifyTime: now,
             content: '#JavaScript 权威指南'
@@ -82,7 +82,7 @@ define(function () {
         },{
             id: 1,
             pid: 1,
-            title: '笔记2',
+            title: '笔记4',
             createTime: now,
             modifyTime: now,
             content: '#JavaScript 非权威指南'
@@ -96,7 +96,7 @@ define(function () {
         notes: [{
             id: 0,
             pid: 2,
-            title: '笔记1',
+            title: '笔记5',
             createTime: now,
             modifyTime: now,
             content: '#JavaScript 权威指南'
@@ -104,7 +104,7 @@ define(function () {
         },{
             id: 1,
             pid: 2,
-            title: '笔记2',
+            title: '笔记6',
             createTime: now,
             modifyTime: now,
             content: '#JavaScript 非权威指南'
@@ -276,8 +276,13 @@ define(function () {
      * @return {array}
      * */
     var getNotesAll = function (pid) {
-        var targetNoteBook = getNoteBookById(pid);
-        return targetNoteBook.notes;
+        if (pid === -1) {
+            return [];
+        } else {
+            console.log('pid', pid);
+            var targetNoteBook = getNoteBookById(pid);
+            return targetNoteBook.notes;
+        }
     };
 
     /*
@@ -315,8 +320,8 @@ define(function () {
             var note = {
                 id: noteId,
                 pid: pid,
-                title: title,
-                content: content,
+                title: title || '笔记' + noteId,
+                content: content || '笔记内容',
                 createTime: now,
                 modifyTime: now,
                 tags: []
