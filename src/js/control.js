@@ -54,6 +54,7 @@ define(['jquery', 'db', 'marked'], function ($, db, marked) {
     var disNoteBook = function () {
         $('#bottom-area').hide();
         $('#book-list').html('');
+
         var noteBookList = db.getNoteBookList();
         var length = noteBookList.length;
         if (length !== 0) {
