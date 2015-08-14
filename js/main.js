@@ -3,12 +3,11 @@ require.config({
     paths: {
         jquery: './jquery-1.11.3.min',
         db: './db',
-        control: './control'
+        control: './control',
+        marked: './marked.min'
     }
 });
-require(['jquery', 'db', 'control'], function ($, db, ctrl) {
+require(['db', 'control'], function (db, ctrl) {
     ctrl.init();
-    ctrl.disNoteBook();
-    ctrl.addNoteBook();
     window.db = db;
 });

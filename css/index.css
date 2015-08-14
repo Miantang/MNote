@@ -1,3 +1,9 @@
+.user-select-none {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 html,
 body,
 h1,
@@ -170,6 +176,12 @@ body {
   -webkit-transition: all 0.5s;
           transition: all 0.5s;
 }
+.main-content .books-aside ul {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 .main-content .books-aside ul li {
   height: 60px;
   width: 100%;
@@ -195,11 +207,12 @@ body {
   border-left: solid 3px #4ab9d2;
   background: #f1f3f8;
 }
+.main-content .books-aside ul li.selected {
+  background: #c5e3ea;
+  border: 3px solid #4ab9d2;
+}
 .main-content .books-aside ul li.editable {
   background: #fff;
-}
-.main-content .books-aside ul li.selected {
-  border: 3px solid #ababab;
 }
 .main-content .notes-aside {
   -webkit-transition: all 0.5s;
@@ -214,6 +227,7 @@ body {
   width: 100%;
   height: 60px;
   overflow: hidden;
+  cursor: pointer;
 }
 .main-content .notes-aside div .add-btn {
   position: absolute;
@@ -238,6 +252,10 @@ body {
   user-select: none;
 }
 .main-content .notes-aside ul {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   position: relative;
   width: 100%;
 }
@@ -246,16 +264,26 @@ body {
   width: auto;
   overflow: hidden;
   position: relative;
-  margin: 5px 2px;
-  border: 1px solid #000000;
+  margin-top: 0;
+  margin-right: 12px;
+  margin-bottom: 10px;
+  margin-left: 12px;
+  border: 1px solid #c5e3ea;
+  background: #e9f6f8;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .main-content .notes-aside ul li h2 {
   margin-top: 5px;
+  margin-left: 5px;
   font-size: 1.5em;
 }
 .main-content .notes-aside ul li p {
   position: absolute;
-  top: 28px;
+  left: 10px;
+  top: 30px;
   color: #000;
   line-height: 1.5;
   font-size: 0.7em;
@@ -273,9 +301,20 @@ body {
   border: 0 solid #c5e3ea;
 }
 .main-content .notes-aside ul li:hover {
-  border: 1px solid #4ab9d2;
+  border-color: #4ab9d2;
 }
-.main-content .note-content {
+.main-content .notes-aside ul li.active {
+  margin-right: 0;
+  background: #f6f6f6;
+}
+.main-content .notes-aside ul li.active:hover {
+  border-color: #4ab9d2;
+}
+.main-content .notes-aside ul li.selected {
+  background: #c5e3ea;
+  border: 3px solid #4ab9d2;
+}
+.main-content #note-content {
   -webkit-transition: all 0.5s;
           transition: all 0.5s;
   position: absolute;
@@ -284,14 +323,24 @@ body {
   height: 100%;
   color: #f6f6f6;
 }
-.main-content .note-content h1 {
+.main-content #note-content h1 {
   height: 70px;
   width: 100%;
   padding-left: 20px;
-  border-bottom: 1px solid #e9f6f8;
+  border-bottom: 1px solid #c5e3ea;
+  font-size: 32px;
+  line-height: 64px;
+  color: #4ab9d2;
   background: #f6f6f6;
 }
-.main-content .note-content .note-details {
+.main-content #note-content #note-time {
+  width: 100%;
+  height: 30px;
+  background: #f6f6f6;
+  font-size: 12px;
+  color: #000;
+}
+.main-content #note-content #note-details {
   width: 100%;
   height: 100%;
   font-size: 16px;
