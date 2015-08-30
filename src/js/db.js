@@ -128,11 +128,11 @@ define(function () {
     * */
     var addNoteBook = function () {
         var title = 'NoUse';
-        if(!isExistBookTitle(title) && title !== '') {
+        if(/*!isExistBookTitle(title) && */title !== '') {
             var now = new Date();
             var notebook = {
                 id: bookId,
-                title: '笔记本' + bookId,
+                title: '笔记本'/* + bookId*/,
                 createTime: now,
                 modifyTime: now,
                 notes: []
@@ -333,6 +333,7 @@ define(function () {
         return false;
     };
     return {
+        // CRUD NoteBook
         addNoteBook: addNoteBook,
         deleteNoteBookById: deleteNoteBookById,
         deleteNoteBookByTitle: deleteNoteBookByTitle,
@@ -341,7 +342,7 @@ define(function () {
         getNoteBookList: getNoteBookList,
 
         updateNoteBookTitleById: updateNoteBookTitleById,
-
+        // CRUD Note by NoteBook Id
         getNotesAll: getNotesAll,
         getNoteById: getNoteById,
         addNote: addNote

@@ -10,5 +10,6 @@ require.config({
 require(['db', 'control'], function (db, ctrl) {
     ctrl.init();
     window.db = db;
+    window.ctrl = ctrl;
     
 });

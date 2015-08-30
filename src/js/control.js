@@ -111,7 +111,8 @@ define(['jquery', 'db', 'marked'], function ($, db, marked) {
     };
 
     var displayNoteByBook = function () {
-        $('#note-list').html('');
+        var note_list = $('#note-list');
+        $(note_list).html('');
         var notes = db.getNotesAll(currentNoteBookId);
         if (notes.length === 0) {
             return false;
@@ -123,11 +124,8 @@ define(['jquery', 'db', 'marked'], function ($, db, marked) {
             currentNoteId = 0;
             displayNote();
         }
-        if( $('#note-list').html() === '') {
-            return false;
-        } else {
-            return true;
-        }
+
+        return $(note_list).html() === '';
     };
 
     var displayNote = function () {
@@ -144,6 +142,10 @@ define(['jquery', 'db', 'marked'], function ($, db, marked) {
         displayNoteByBook();
     };
     return {
-        init: init
+        init: init,
+
+        // debug API
+        currentNoteBookId: function(){console.log(currentNoteBookId);},
+        currentNoteId: function(){console.log(currentNoteId);}
     };
 });
